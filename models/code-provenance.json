@@ -1,0 +1,36 @@
+{
+  "source_repository": "https://github.com/LynnColeArt/ai-hotbox",
+  "source_revision": "a0f63f0c2806c3dc91ecd418c0d54db9bbc38f72",
+  "imported_files": [
+    {
+      "source_path": "impossible_states/__init__.py",
+      "destination_path": "impossible_states/__init__.py",
+      "source_sha256": "5fbcde3436ba96bff26b0ab6414f488c2b069a435cb0df1d1f5fcc7021cc980e"
+    },
+    {
+      "source_path": "impossible_states/analysis.py",
+      "destination_path": "impossible_states/analysis.py",
+      "source_sha256": "072c99debef60f48170c59b038db6177e17b722adb9621ae197a7e2e79628527"
+    },
+    {
+      "source_path": "impossible_states/dataset.py",
+      "destination_path": "impossible_states/dataset.py",
+      "source_sha256": "f44af02b09d7ce636282671d629e0934b45add1a724447d11ae48a54e2bab91d"
+    },
+    {
+      "source_path": "impossible_states/engine.py",
+      "destination_path": "impossible_states/engine.py",
+      "source_sha256": "e216daa99d4d24081d48d1c52f566d4b3ffc695324fe0ca120604117b811b56d"
+    },
+    {
+      "source_path": "tests/test_impossible_states.py",
+      "destination_path": "tests/test_impossible_states.py",
+      "source_sha256": "fcc2c8b5a33f44c224b7dbd6600eb1054056f53941efa5608924cec79b230613"
+    }
+  ],
+  "source_license": "licenses/ai-hotbox-LICENSE",
+  "local_changes": [
+    "Engine initialization rejects architectures other than dense Qwen3 before model access."
+  ],
+  "scope": "Reference foundation; Qwen3.6 Q8_0 backend not yet implemented."
+}

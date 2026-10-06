@@ -1,0 +1,5 @@
+# Dependency versions used to verify the inherited dense-Qwen3 reference tests.
+# This is not the Spark/Qwen3.6 runtime environment.
+numpy==1.26.4
+transformers==4.57.0
+# PyTorch is platform-specific; the reference tests were run with torch 2.4.1.

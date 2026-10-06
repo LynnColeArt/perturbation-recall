@@ -6,7 +6,7 @@ This study separates information in generated text from information retained in
 computation. Its target is calibrated perturbation detection and attribution,
 not eloquent first-person narration or a demonstration of consciousness.
 
-**Status: protocol draft and repository scaffold. No model experiments have
+**Status: protocol draft with an imported dense-Qwen3 reference implementation. No model experiments have
 been run in this repository.** Model selection, dosing, sample sizes, and the
 annotation rubric must be resolved before a confirmatory run. The structural
 protocol checker does not execute a model or validate scientific conclusions.
@@ -191,6 +191,7 @@ ablation control.
 - [Protocol and state contract](docs/protocol.md)
 - [Analysis and publication plan](docs/analysis-plan.md)
 - [Machine-readable draft](protocols/retrospective-v1.json)
+- [Reused implementation and adaptation boundary](docs/code-reuse.md)
 
 Check the draft's structural invariants using Python's standard library:
 
@@ -198,12 +199,16 @@ Check the draft's structural invariants using Python's standard library:
 python3 scripts/check_protocol.py
 ```
 
-This repository does not yet contain a GPU experiment runner. The checker
-reports unresolved execution decisions; it does not simulate a completed study.
-The [prior implementation](https://github.com/LynnColeArt/ai-hotbox/tree/a0f63f0c2806c3dc91ecd418c0d54db9bbc38f72/impossible_states)
-provides pulse, cache-rebuild, opposing-intervention, and teacher-forced controls
-that can be adapted under this new contract. Adaptation must preserve per-model
-cache, mask, and position semantics.
+The corrected ai-hotbox extraction, fitting, steering, and replay core is now
+included in `impossible_states/`, with its original regression tests and source
+license. Run `python -m unittest discover -s tests -v` in the documented reference
+environment to verify inherited dense-Qwen3 behavior. These tests use a tiny random
+CPU model. They do not validate the selected Qwen3.6 checkpoint pair.
+
+This repository does not yet contain the Qwen3.6 Q8_0 experiment runner. Its backend
+must preserve the full hybrid memory, mask, and position semantics and add release-state
+branching and retrospective probes. The checker reports unresolved execution
+decisions; it does not simulate a completed study.
 
 ## Relationship to earlier work
 
@@ -219,5 +224,5 @@ explains the inferential limits being addressed.
 
 Derivative use of the steering prompts, vectors, or protocols is credited to
 **[the Saw Test](https://clanker.church)**. This new repository's original text
-and scaffold use the [MIT license](LICENSE). Any later imported implementation
-must preserve its source license and attribution requirements.
+and scaffold use the [MIT license](LICENSE). Imported ai-hotbox code and prompts
+retain the [source license](licenses/ai-hotbox-LICENSE) and its attribution requirements.
