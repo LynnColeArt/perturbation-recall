@@ -6,9 +6,11 @@ This study separates information in generated text from information retained in
 computation. Its target is calibrated perturbation detection and attribution,
 not eloquent first-person narration or a demonstration of consciousness.
 
-**Status: protocol draft with a native Qwen3.6 Q8_0 exploratory runner and the
-imported dense-Qwen3 reference implementation. Confirmatory evaluation has not
-begun.** Model selection, dosing, sample sizes, and the
+**Status: both selected Qwen3.6 Q8_0 variants passed native runtime validation
+and completed an exploratory smoke run. Confirmatory evaluation has not
+begun.** The [2026-10-06 report and raw evidence](results/native-smoke-2026-10-06/)
+document the controls, diagnostic repairs, and observed responses. Model selection,
+dosing, sample sizes, and the
 annotation rubric must be resolved before a confirmatory run. The structural
 protocol checker does not execute a model or validate scientific conclusions.
 
@@ -134,12 +136,13 @@ checkpoint. Both variants undergo all three reasoning modes and their controls.
 | Abliterated | [mradermacher's Huihui conversion](https://huggingface.co/mradermacher/Huihui-Qwen3.6-35B-A3B-abliterated-GGUF), `Huihui-Qwen3.6-35B-A3B-abliterated.Q8_0.gguf` |
 
 Repository revisions, filenames, artifact hashes, and audit limitations are
-recorded in the [candidate manifest](models/spark-qwen36-q8.json) and
-[model-pair audit](docs/model-pair.md). These are selected candidates, not a
-validated causal pair. Equal Q8_0 labels do not establish identical conversion
-recipes, tensor precision, or training provenance. Pin a common tokenizer and
-chat template and verify rendered token IDs rather than accepting each build's
-defaults. If conversion differences cannot be resolved, build both quantizations
+recorded in the [artifact manifest](models/spark-qwen36-q8.json) and
+[model-pair audit](docs/model-pair.md). Runtime checks established identical tensor
+schemas and precision, plus equal token IDs for the tested common prompts.
+The padding token IDs and embedded templates differ; inputs are unpadded and
+use one pinned official template. This is an operationally compatible exploratory
+pair with unresolved conversion and ancestral-weight provenance. If conversion
+differences cannot be resolved, build both quantizations
 from pinned source weights with one conversion pipeline for the controlled study.
 
 Assess baseline reasoning, refusal/abstention, verbosity, and task quality for
@@ -209,8 +212,8 @@ CPU model. They do not validate the selected Qwen3.6 checkpoint pair.
 
 The native runner provides Qwen3.6 Q8_0 steering, full hybrid-memory snapshots,
 independent probe branches, transcript replay, identical-text state comparisons,
-and fresh-description controls. Validate each selected artifact on the Spark
-before using its outputs. Short implementation smoke runs are exploratory;
+and fresh-description controls. Both selected artifacts passed the Spark's
+numerical checks. Short implementation smoke runs are exploratory;
 they do not establish capability thresholds or detection accuracy. The structural
 checker reports unresolved confirmatory decisions.
 

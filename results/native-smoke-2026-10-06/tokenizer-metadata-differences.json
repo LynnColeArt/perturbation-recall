@@ -1,0 +1,7 @@
+[
+  {
+    "field": "tokenizer.ggml.padding_token_id",
+    "original": 248055,
+    "abliterated": 248044
+  }
+]

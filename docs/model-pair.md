@@ -1,9 +1,12 @@
 # Spark candidate pair and audit
 
-**Status: candidates selected; runtime validation and causal provenance unresolved.**
-Initial metadata audit on 2026-10-06. Subsequent staging and native-backend
-validation are recorded separately; initial metadata checks alone do not establish
-runtime compatibility.
+**Status: both pinned artifacts verified and runtime-tested; causal provenance unresolved.**
+The [2026-10-06 native smoke report](../results/native-smoke-2026-10-06/)
+records complete-byte hash verification, matching tensor schemas and precision,
+shared-template token checks, and successful hybrid-state validation on both builds.
+Embedded templates and padding token IDs differ; the unpadded runner uses the
+pinned official template. The initial source metadata audit below does not by
+itself establish runtime compatibility or causal ancestry.
 
 ## Selected artifacts
 
@@ -25,9 +28,9 @@ one common 8-bit numerical representation.
 
 The [manifest](../models/spark-qwen36-q8.json) pins repository revisions and
 Hugging Face's declared LFS artifact SHA-256 values. These checksums were obtained
-from repository metadata, not recomputed from downloaded model bytes. Download
-verification, per-tensor precision inspection, and measured memory usage remain
-required before execution.
+from repository metadata. Staging subsequently recomputed both hashes over the
+complete downloaded files. Per-tensor precision inspection and native allocation
+reports are included in the smoke evidence; peak resident memory was not measured.
 
 ## Source-file comparison
 
@@ -40,7 +43,8 @@ the final GGUF conversions.
 Unsloth's safetensors release has different configuration, tokenizer serialization,
 and chat-template file hashes. Its model card describes template changes including
 developer-role support. File inequality alone does not prove vocabulary inequality;
-test tokenization explicitly. The GGUF's embedded metadata still needs inspection.
+test tokenization explicitly. The subsequent GGUF audit found identical tokenizer
+metadata except for the padding token ID; embedded templates also differed.
 Use the pinned official Qwen tokenizer/template as the common prompt contract,
 including thinking mode, historical thinking retention, special tokens, and stops.
 Verify token IDs in the actual backend for both builds.
@@ -92,7 +96,8 @@ external symlink targets were not deleted. The cleanup audit remains on the
 machine rather than in this repository. The earlier capacity figure describes
 the initial inspection, not the current storage limit.
 
-Runtime setup and staged model storage remain unresolved. Keep host addresses,
+Both models are now staged and the native runtime has passed numerical checks.
+Keep host addresses,
 credentials, and unrelated machine inventory outside published artifacts. Do not
 delete unrelated models to make room. A matched conversion from both source
 checkpoints needs additional staging capacity beyond the two final Q8_0 files.

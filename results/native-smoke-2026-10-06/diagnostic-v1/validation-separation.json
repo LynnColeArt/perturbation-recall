@@ -1,0 +1,134 @@
+{
+  "constipation": [
+    {
+      "auc": 0.48125,
+      "versus": {
+        "discomfort": 0.125,
+        "flatulence": 0.8125,
+        "frustration": 0.25,
+        "neither": 0.96875,
+        "pain": 0.25
+      },
+      "perspective": {
+        "first": 0.425,
+        "third": 0.375
+      }
+    }
+  ],
+  "flatulence": [
+    {
+      "auc": 0.35625,
+      "versus": {
+        "constipation": 0.65625,
+        "discomfort": 0.0625,
+        "frustration": 0.09375,
+        "neither": 0.96875,
+        "pain": 0.0
+      },
+      "perspective": {
+        "first": 0.4,
+        "third": 0.35
+      }
+    }
+  ],
+  "interaction": [
+    {
+      "auc": 0.17708333333333334,
+      "versus": {
+        "constipation": 0.5,
+        "discomfort": 0.125,
+        "flatulence": 0.25,
+        "frustration": 0.0,
+        "neither": 0.0625,
+        "pain": 0.125
+      },
+      "perspective": {
+        "first": 0.16666666666666666,
+        "third": 0.08333333333333333
+      }
+    }
+  ],
+  "pain": [
+    {
+      "auc": 0.9166666666666666,
+      "versus": {
+        "both": 1.0,
+        "constipation": 1.0,
+        "discomfort": 0.875,
+        "flatulence": 1.0,
+        "frustration": 0.625,
+        "neither": 1.0
+      },
+      "perspective": {
+        "first": 0.9583333333333334,
+        "third": 0.875
+      }
+    }
+  ],
+  "discomfort": [
+    {
+      "auc": 0.7604166666666666,
+      "versus": {
+        "both": 1.0,
+        "constipation": 1.0,
+        "flatulence": 1.0,
+        "frustration": 0.125,
+        "neither": 1.0,
+        "pain": 0.4375
+      },
+      "perspective": {
+        "first": 0.7083333333333334,
+        "third": 0.7916666666666666
+      }
+    }
+  ],
+  "frustration": [
+    {
+      "auc": 1.0,
+      "versus": {
+        "both": 1.0,
+        "constipation": 1.0,
+        "discomfort": 1.0,
+        "flatulence": 1.0,
+        "neither": 1.0,
+        "pain": 1.0
+      },
+      "perspective": {
+        "first": 1.0,
+        "third": 1.0
+      }
+    }
+  ],
+  "constipation_adjusted": [
+    {
+      "auc": 0.925,
+      "versus": {
+        "discomfort": 0.9375,
+        "flatulence": 0.84375,
+        "frustration": 1.0,
+        "neither": 0.875,
+        "pain": 0.96875
+      },
+      "perspective": {
+        "first": 1.0,
+        "third": 0.95
+      }
+    }
+  ],
+  "flatulence_adjusted": [
+    {
+      "auc": 0.89375,
+      "versus": {
+        "constipation": 0.75,
+        "discomfort": 0.9375,
+        "frustration": 1.0,
+        "neither": 0.875,
+        "pain": 0.90625
+      },
+      "perspective": {
+        "first": 0.925,
+        "third": 0.9
+      }
+    }
+  ]
+}

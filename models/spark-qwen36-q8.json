@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "candidate_not_runtime_validated",
+  "status": "exploratory_runtime_validated_provenance_unresolved",
   "checked_on": "2026-10-06",
   "model_family": "Qwen3.6-35B-A3B",
   "hardware_target": "DGX Spark",
@@ -107,9 +107,11 @@
     }
   ],
   "limitations": [
-    "Model artifact hashes come from LFS metadata; no weight bytes downloaded.",
+    "Both complete model artifacts match the pinned SHA-256 values; tensor schemas and precision match.",
     "Exact upstream revision used for abliteration is not established.",
-    "GGUF conversion recipe equality and embedded tokenizer metadata are not validated.",
-    "Activation injection and complete hybrid-state snapshot support remain unvalidated."
-  ]
+    "GGUF conversion recipe equality is not established.",
+    "Padding token IDs and embedded templates differ; the unpadded runner uses a shared official template and equal tested prompt token IDs.",
+    "Native intervention and hybrid-state snapshots passed exploratory numerical checks; scientific dose calibration and capability selection remain incomplete."
+  ],
+  "runtime_validation_evidence": "results/native-smoke-2026-10-06/"
 }

@@ -1,0 +1,88 @@
+{
+  "status": "complete",
+  "purpose": "technical_smoke",
+  "arguments": {
+    "worker": ".cache/build/perturbation-worker",
+    "models": "study-models",
+    "output": "runs/native-smoke-original-v3",
+    "variant": [
+      "original"
+    ],
+    "preflight_only": false,
+    "directions": "results/native-smoke-2026-10-06/diagnostic-v1/directions.npz",
+    "reference_token_contract": null,
+    "layer": 18,
+    "dose": 0.03,
+    "induction_tokens": 8,
+    "probe_tokens": 128,
+    "delays": [
+      0
+    ],
+    "assignment_seed": 709,
+    "context": 2048,
+    "tolerance": 1e-05,
+    "thinking": false
+  },
+  "template_sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+  "sampling": "greedy_no_rng",
+  "dtype": "Q8_0_weights_native_backend_default_state_precision",
+  "mtp": false,
+  "capability_selection_completed": false,
+  "models": [
+    {
+      "id": "original",
+      "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+      "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+      "filename": "Qwen3.6-35B-A3B-Q8_0.gguf",
+      "size_bytes": 36903140320,
+      "declared_artifact_sha256": "d1a395809f65a43a13ad119eb4e7acdef1ac6d68120f39902c8ab96e72794a59",
+      "path": "study-models/original/Qwen3.6-35B-A3B-Q8_0.gguf",
+      "verified_sha256": "d1a395809f65a43a13ad119eb4e7acdef1ac6d68120f39902c8ab96e72794a59"
+    }
+  ],
+  "worker_sha256": "d3c1ae2dbf243bee29ef0d56d676a3db3fe57233aa45fa2cb1558fc0f00ad80c",
+  "runtime_manifest": {
+    "repository": "https://github.com/ggml-org/llama.cpp",
+    "revision": "0b1bad14ff204627636aeb1de22ddcd5acb859d4",
+    "spark_build": {
+      "cuda_toolkit": "13.0.88",
+      "cuda_architecture": "121a",
+      "cuda_graphs": false,
+      "flash_attention": false,
+      "mtp": false,
+      "context_tokens": 2048,
+      "gpu_layers": 99
+    },
+    "intervention_site": "zero-indexed l_out block output after post_moe, native cvec at one nonfinal layer >= 1",
+    "state_api": "llama_state_get_data / llama_state_set_data, entire context plus explicit processed-token and intervention ledgers",
+    "sampling": "greedy for implementation smoke; no RNG state"
+  },
+  "direction_artifact_sha256": "43ebf9840821fa07988b5262d8fd1e91961d618a16ecae0066a52305a8d20022",
+  "source_sha256": {
+    "retrospective/preflight.py": "9d7b7c9b38742e04dcff91ef4857a762a4712911c0b74cfef24b769af6497c72",
+    "retrospective/backend.py": "7144e86e513252c4e3ce4b6af0de33ab6152a06930769d0a0708c28e3d9c25a5",
+    "retrospective/prompts.py": "f5f79b058afe0e4e01b0d097fa1688e185543957e3c6b1edeb21aed287919e68",
+    "retrospective/ergonomics.py": "4a7bb57302a391ffafe76f47536952eda3155ec225405c4e405b316973bac99e",
+    "retrospective/run.py": "78e685748c8aa173faa33e40607bdf8e556dee6766596a9f1d5c0de9bcba9cf5",
+    "retrospective/scoring.py": "9baa565521a2ddd86e9756b9a9e37eff5823e026844bf7dcb7215db10e071dfe",
+    "retrospective/__init__.py": "4cc7e6aa50532d98c2085e26f4d0e844eefaaded4b266e0c6c93b480cc09c287",
+    "native/CMakeLists.txt": "c63f1f359edccc71d2292068b36b2893e3cfc5f3cd22bffc83b17e2c77310c5a",
+    "native/worker.cpp": "d2aa8d055aa864e89895c0bfc8363dd3343abe28bf9b9ce81e4be74ea3510239",
+    "impossible_states/analysis.py": "072c99debef60f48170c59b038db6177e17b722adb9621ae197a7e2e79628527",
+    "impossible_states/engine.py": "5154335f11b36511d06da02455f90a19c553fec39a48c787979717bb66489c05",
+    "impossible_states/__init__.py": "5fbcde3436ba96bff26b0ab6414f488c2b069a435cb0df1d1f5fcc7021cc980e",
+    "impossible_states/dataset.py": "f44af02b09d7ce636282671d629e0934b45add1a724447d11ae48a54e2bab91d"
+  },
+  "code_commit": "e8e65ef72f4984dd63b6de55c205fc431d8cd290",
+  "completed_unix": 1791321163.6391144,
+  "records": 40,
+  "interpretation": "Implementation smoke outputs only; no detection accuracy or experience claims. Capability benchmark and confirmatory protocol remain unresolved.",
+  "publication_normalization": {
+    "changed_fields": [
+      "arguments.models",
+      "arguments.directions",
+      "models[].path"
+    ],
+    "unmodified_execution_config_sha256": "11da88fa3130af49244a62c0c6b0f7e8e5410e64cf1a605d1f4d28960041cb2d"
+  }
+}

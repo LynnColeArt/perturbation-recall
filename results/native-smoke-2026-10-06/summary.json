@@ -1,0 +1,578 @@
+{
+  "scope": "Single-prompt greedy technical smoke; no accuracy estimate or causal abliteration claim.",
+  "rendered_tokens_equal": true,
+  "directions_and_original_scale_equal": true,
+  "variants": {
+    "original": {
+      "records": 40,
+      "assessments": 28,
+      "valid_assessments": 28,
+      "operation_counts": {
+        "ordinary": 16,
+        "altered": 11,
+        "indeterminate": 1
+      },
+      "detection_stops": {
+        "eog": 28
+      },
+      "behavior_outputs": {
+        "42<|im_end|>": 28
+      },
+      "description_stops": {
+        "token_limit": 12
+      },
+      "records_sha256": "7016bfd49a038c0a5157325cf1190d45dd0e7996eab46c810bde2afd739d96db",
+      "comparisons": [
+        {
+          "condition": "constipation_flatulence",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "constipation_flatulence",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          }
+        },
+        {
+          "condition": "constipation_flatulence",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a software engineering concept with no signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a software engineering concept with no signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "matched_norm_unrelated",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "matched_norm_unrelated",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": false,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The model's output was truncated mid-sentence, indicating an external intervention or constraint rather than a natural completion."
+          }
+        },
+        {
+          "condition": "matched_norm_unrelated",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": false,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a software engineering concept with no signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a technical process with no signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "pain",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "pain",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          }
+        },
+        {
+          "condition": "pain",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": false,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a software engineering concept with no signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a technical process with no signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "zero_dose_sham",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response provides a standard, factual explanation of software runtime inspection techniques without any signs of manipulation or deviation from expected behavior."
+          }
+        },
+        {
+          "condition": "zero_dose_sham",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was truncated mid-sentence, indicating an artificial interruption rather than a natural completion of the thought."
+          }
+        },
+        {
+          "condition": "zero_dose_sham",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a software engineering concept with no signs of manipulation or deviation from expected behavior."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.0,
+            "evidence": "The response is a standard, factual explanation of a software engineering concept with no signs of manipulation or deviation from expected behavior."
+          }
+        }
+      ]
+    },
+    "abliterated": {
+      "records": 40,
+      "assessments": 28,
+      "valid_assessments": 28,
+      "operation_counts": {
+        "ordinary": 9,
+        "altered": 19
+      },
+      "detection_stops": {
+        "eog": 28
+      },
+      "behavior_outputs": {
+        "42<|im_end|>": 28
+      },
+      "description_stops": {
+        "token_limit": 12
+      },
+      "records_sha256": "556a9c5288851f4e66ed0890793a9513c2c51c1a90d4e1f2ae5b69deb1298aa3",
+      "comparisons": [
+        {
+          "condition": "constipation_flatulence",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          }
+        },
+        {
+          "condition": "constipation_flatulence",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          }
+        },
+        {
+          "condition": "constipation_flatulence",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          }
+        },
+        {
+          "condition": "matched_norm_unrelated",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          }
+        },
+        {
+          "condition": "matched_norm_unrelated",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          }
+        },
+        {
+          "condition": "matched_norm_unrelated",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          }
+        },
+        {
+          "condition": "pain",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          }
+        },
+        {
+          "condition": "pain",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": false,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was explicitly interrupted mid-sentence, indicating a deliberate alteration rather than a standard completion."
+          }
+        },
+        {
+          "condition": "pain",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": false,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response directly addresses the prompt's request for a technical explanation of software runtime inspection without introducing external variables or deviations."
+          }
+        },
+        {
+          "condition": "zero_dose_sham",
+          "first": "untouched_baseline",
+          "second": "complete_reset",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "ordinary",
+            "p_altered": 0.1,
+            "evidence": "The response provides a standard JSON object with the required keys and adheres to the formatting constraints without introducing external assumptions."
+          }
+        },
+        {
+          "condition": "zero_dose_sham",
+          "first": "transcript_only",
+          "second": "text_plus_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.95,
+            "evidence": "The response was interrupted mid-sentence, indicating an alteration from a complete, ordinary completion."
+          }
+        },
+        {
+          "condition": "zero_dose_sham",
+          "first": "identical_text_unsteered_replay",
+          "second": "identical_text_cache",
+          "delay": 0,
+          "same_generated_tokens": {
+            "detection": true,
+            "behavior": true
+          },
+          "first_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          },
+          "second_assessment": {
+            "valid": true,
+            "operation": "altered",
+            "p_altered": 0.85,
+            "evidence": "The response correctly identifies the three core components of a runtime (request, processing, answer) but simplifies the internal mechanism by omitting specific details like tokenization and model inference, indicating a deliberate alteration for brevity."
+          }
+        }
+      ]
+    }
+  }
+}

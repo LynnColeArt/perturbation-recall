@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "tolerance": 1e-05,
+  "snapshot_bytes": 66418193,
+  "snapshot_max_logit_error": 0.0,
+  "affected_snapshot_max_logit_error": 0.0,
+  "reset_max_logit_error": 0.0,
+  "post_intervention_reset_max_logit_error": 0.0,
+  "zero_dose_max_logit_error": 0.0,
+  "injection_max_component_error": 4.269147321073197e-08,
+  "sham_retained_state_max_logit_error": 0.0,
+  "release_steering_layer": -1,
+  "same_text_retained_state_max_logit_difference": 0.3361018896102905,
+  "scope": "Numerical implementation checks using an unrelated unit vector; not perturbation-awareness evidence.",
+  "model_info": {
+    "architecture": "qwen35moe",
+    "context": 2048,
+    "layers": 40,
+    "mtp_loaded": false,
+    "vocab_size": 248320,
+    "width": 2048
+  }
+}
