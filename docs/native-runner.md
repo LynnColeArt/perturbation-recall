@@ -8,6 +8,10 @@ and intervention configuration. Snapshots are copied bytes held within that proc
 The Python controller restores the same release snapshot separately for detection
 and behavioral probes.
 
+The pinned runtime's serialized state contains inference memory, not a saved
+logit buffer. Every restored branch evaluates new probe tokens before reading
+logits or generating an answer.
+
 ## Setup
 
 Use the runtime revision in `models/llama-runtime.json`. The tested Spark build
@@ -58,7 +62,7 @@ prefill splitting can itself introduce small numerical differences.
 .venv/bin/python -m retrospective.run \
   --worker .cache/build/perturbation-worker --models /path/to/study-models \
   --output runs/smoke-001 --layer 18 --dose 0.03 \
-  --induction-tokens 8 --probe-tokens 32 --delays 0
+  --induction-tokens 8 --probe-tokens 128 --delays 0
 ```
 
 The original checkpoint supplies directions for both variants. Pain and the joint
@@ -74,6 +78,18 @@ from its own restored state. Delays use identical forced neutral tokens. Fresh
 description accounts distinguish actual vector application, zero dose, and
 unrelated-vector controls. Account-based reasoning is saved separately from
 hidden-condition detection.
+
+Free generation uses the requested induction budget. Teacher forcing repeats
+complete neutral sentences until it meets that minimum; its actual duration is
+recorded separately. Detection requests a compact JSON assessment. Malformed or
+truncated responses remain missing assessments, rather than receiving an imputed
+probability. The initial 32-token diagnostic run exposed truncated assessments
+and a false-positive response to a forced sentence fragment; those settings were
+revised before the paired smoke run.
+
+For separate invocations, pass `--directions` with the original run's direction
+artifact and `--reference-token-contract` with its `token-contract.json`. This
+enforces the same rendered token sequence across checkpoints.
 
 These defaults are implementation smoke settings: one induction prompt, greedy
 decoding, a short output budget, and thinking disabled. `--thinking` enables the

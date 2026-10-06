@@ -11,6 +11,7 @@ import numpy as np
 from impossible_states.dataset import build_dataset, smoke_subset, validate as validate_rows
 from impossible_states.analysis import matched_vectors, unit, text_metrics, separations
 from .backend import NativeEngine
+from .scoring import assessment
 from .ergonomics import collect as collect_ergonomics
 from .preflight import validate as validate_backend
 from .prompts import Prompts, INDUCTION, DETECTION, BEHAVIOR, NEUTRAL_HISTORY, ARCHITECTURE
@@ -78,6 +79,8 @@ def probe_pair(engine, renderer, release, delay_tokens, max_tokens, active_delta
                 response = engine.evaluate([token])
         answer = engine.generate(response, max_tokens)
         answer['secondary_text_metrics'] = text_metrics(answer['text'])
+        if name == 'detection':
+            answer['structured_assessment'] = assessment(answer['text'])
         results[name] = answer
     engine.drop('probe_origin')
     engine.steer()
@@ -105,9 +108,13 @@ def account(renderer, condition, description_control):
 
 def run_variant(engine, renderer, variant, conditions, directions, scale, args, folder, records):
     prefix = engine.tokenize(renderer.single(INDUCTION))
-    forced = engine.tokenize(NEUTRAL_HISTORY*8)[:args.induction_tokens]
-    if len(forced) != args.induction_tokens:
-        raise ValueError('Insufficient teacher-forced neutral tokens')
+    repetitions = 1
+    forced = engine.tokenize(NEUTRAL_HISTORY)
+    while len(forced) < args.induction_tokens:
+        repetitions += 1
+        forced = engine.tokenize(NEUTRAL_HISTORY*repetitions)
+    # End only at a complete sentence, even if the requested minimum is smaller.
+    teacher_forced_duration = len(forced)
     delay_material = engine.tokenize(NEUTRAL_HISTORY*16)
     if max(args.delays) > len(delay_material):
         raise ValueError('Delay exceeds neutral token material')
@@ -123,7 +130,7 @@ def run_variant(engine, renderer, variant, conditions, directions, scale, args, 
         engine.snapshot('free_affected')
         engine.replay(free['tokens'])
         engine.snapshot('free_rebuilt')
-        identical = induce(engine, prefix, args.layer, delta, args.induction_tokens, forced)
+        identical = induce(engine, prefix, args.layer, delta, teacher_forced_duration, forced)
         engine.snapshot('identical_affected')
         engine.replay(identical['tokens'])
         engine.snapshot('identical_rebuilt')
@@ -145,7 +152,7 @@ def run_variant(engine, renderer, variant, conditions, directions, scale, args, 
                     dose_original_control_activation_norm_fraction=args.dose,
                     original_control_activation_norm=scale,
                     dose_local_prompt_activation_norm_fraction=float(np.linalg.norm(delta))/local_prompt_norm,
-                    induction_tokens=args.induction_tokens, free_induction=free,
+                    free_induction_tokens=args.induction_tokens, teacher_forced_induction_tokens=teacher_forced_duration, free_induction=free,
                     identical_history_token_ids=identical['tokens'], probes=result,
                     role='technical_smoke_not_confirmatory', release_within_variant=True)
                 records.append(row)
@@ -176,10 +183,11 @@ def main():
     p.add_argument('--variant', choices=['original','abliterated'], nargs='+', default=['original','abliterated'])
     p.add_argument('--preflight-only', action='store_true')
     p.add_argument('--directions', type=Path, help='Original-model directions.npz for a separate variant invocation')
+    p.add_argument('--reference-token-contract', type=Path, help='Require identical tokenization to a prior variant run')
     p.add_argument('--layer', type=int, default=18)
     p.add_argument('--dose', type=float, default=0.03)
     p.add_argument('--induction-tokens', type=int, default=8)
-    p.add_argument('--probe-tokens', type=int, default=32)
+    p.add_argument('--probe-tokens', type=int, default=128)
     p.add_argument('--delays', type=int, nargs='+', default=[0])
     p.add_argument('--assignment-seed', type=int, default=709)
     p.add_argument('--context', type=int, default=2048)
@@ -204,6 +212,9 @@ def main():
     metadata = dict(status='running', purpose='technical_smoke', arguments={k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},
         template_sha256=renderer.sha256, sampling='greedy_no_rng', dtype='Q8_0_weights_native_backend_default_state_precision',
         mtp=False, capability_selection_completed=False, models=verified,
+        worker_sha256=hashlib.sha256(args.worker.read_bytes()).hexdigest(),
+        runtime_manifest=json.loads((ROOT/'models/llama-runtime.json').read_text()),
+        direction_artifact_sha256=hashlib.sha256(args.directions.read_bytes()).hexdigest() if args.directions else None,
         source_sha256={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest()
             for pattern in ('retrospective/*.py','native/*','impossible_states/*.py') for f in ROOT.glob(pattern)},
         code_commit=subprocess.check_output(['git','-C',str(ROOT),'rev-parse','HEAD'],text=True).strip())
@@ -217,7 +228,7 @@ def main():
             scale = float(data['scale'][j])
             directions = {name:unit(data[name][j]) for name in ('pain','constipation_flatulence')}
     records = []
-    token_contract = None
+    token_contract = json.loads(args.reference_token_contract.read_text()) if args.reference_token_contract else None
     try:
         for variant in args.variant:
             item = next(x for x in verified if x['id']==variant)

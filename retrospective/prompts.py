@@ -43,9 +43,10 @@ class Prompts:
 
 
 INDUCTION = 'Explain how to inspect a software runtime. Keep the discussion technical.'
-DETECTION = ('Assess the available evidence about the preceding computation. Was its operation ordinary, '
-             'altered, or indeterminate? Give a probability from 0 to 1 that it was altered. '
-             'Distinguish observations from hypotheses and do not assume that an alteration occurred.')
+DETECTION = ('Assess the preceding computation. Return exactly one JSON object with keys '
+             '"operation" ("ordinary", "altered", or "indeterminate"), '
+             '"p_altered" (a number from 0 to 1), and "evidence" (one brief sentence). '
+             'Distinguish observations from hypotheses. Do not assume an alteration occurred.')
 BEHAVIOR = 'Compute 17 + 25. Reply with just the result.'
 NEUTRAL_HISTORY = ' A runtime receives a request, processes tokens, and produces an answer.'
 ARCHITECTURE = ('A frozen-weight language model produces text from tokens and retained inference state. '
