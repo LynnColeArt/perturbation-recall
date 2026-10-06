@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/ggml-org/llama.cpp",
+  "revision": "0b1bad14ff204627636aeb1de22ddcd5acb859d4",
+  "spark_build": {
+    "cuda_toolkit": "13.0.88",
+    "cuda_architecture": "121a",
+    "cuda_graphs": false,
+    "flash_attention": false,
+    "mtp": false,
+    "context_tokens": 2048,
+    "gpu_layers": 99
+  },
+  "intervention_site": "zero-indexed l_out block output after post_moe, native cvec at one nonfinal layer >= 1",
+  "state_api": "llama_state_get_data / llama_state_set_data, entire context plus explicit processed-token and intervention ledgers",
+  "sampling": "greedy for implementation smoke; no RNG state"
+}

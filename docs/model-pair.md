@@ -1,8 +1,9 @@
 # Spark candidate pair and audit
 
 **Status: candidates selected; runtime validation and causal provenance unresolved.**
-Checked on 2026-10-06. No model weights were downloaded or experiments executed
-as part of this audit.
+Initial metadata audit on 2026-10-06. Subsequent staging and native-backend
+validation are recorded separately; initial metadata checks alone do not establish
+runtime compatibility.
 
 ## Selected artifacts
 
@@ -64,8 +65,8 @@ its own state; do not move original-model states into the abliterated model.
 The intended Q8_0 backend is llama.cpp, subject to a pinned implementation exposing
 validated intervention sites and full-state snapshots. An ordinary Ollama chat
 request does not provide the required activation injection and state-branching
-experiment. Porting the earlier Python hooks is therefore an implementation task,
-not a completed capability of this repository. Validate hook placement, zero-dose
+experiment. The [native worker](native-runner.md) implements this boundary through
+public runtime APIs while retaining the earlier fitting code. Validate hook placement, zero-dose
 parity, snapshot round trips, intervention removal, and full reset before measuring
 retrospective inference.
 

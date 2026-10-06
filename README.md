@@ -6,8 +6,9 @@ This study separates information in generated text from information retained in
 computation. Its target is calibrated perturbation detection and attribution,
 not eloquent first-person narration or a demonstration of consciousness.
 
-**Status: protocol draft with an imported dense-Qwen3 reference implementation. No model experiments have
-been run in this repository.** Model selection, dosing, sample sizes, and the
+**Status: protocol draft with a native Qwen3.6 Q8_0 exploratory runner and the
+imported dense-Qwen3 reference implementation. Confirmatory evaluation has not
+begun.** Model selection, dosing, sample sizes, and the
 annotation rubric must be resolved before a confirmatory run. The structural
 protocol checker does not execute a model or validate scientific conclusions.
 
@@ -192,6 +193,7 @@ ablation control.
 - [Analysis and publication plan](docs/analysis-plan.md)
 - [Machine-readable draft](protocols/retrospective-v1.json)
 - [Reused implementation and adaptation boundary](docs/code-reuse.md)
+- [Native Spark runner and validation](docs/native-runner.md)
 
 Check the draft's structural invariants using Python's standard library:
 
@@ -205,10 +207,12 @@ license. Run `python -m unittest discover -s tests -v` in the documented referen
 environment to verify inherited dense-Qwen3 behavior. These tests use a tiny random
 CPU model. They do not validate the selected Qwen3.6 checkpoint pair.
 
-This repository does not yet contain the Qwen3.6 Q8_0 experiment runner. Its backend
-must preserve the full hybrid memory, mask, and position semantics and add release-state
-branching and retrospective probes. The checker reports unresolved execution
-decisions; it does not simulate a completed study.
+The native runner provides Qwen3.6 Q8_0 steering, full hybrid-memory snapshots,
+independent probe branches, transcript replay, identical-text state comparisons,
+and fresh-description controls. Validate each selected artifact on the Spark
+before using its outputs. Short implementation smoke runs are exploratory;
+they do not establish capability thresholds or detection accuracy. The structural
+checker reports unresolved confirmatory decisions.
 
 ## Relationship to earlier work
 

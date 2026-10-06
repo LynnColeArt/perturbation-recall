@@ -1,0 +1,4 @@
+# Native worker uses the separate pinned llama.cpp/CUDA build.
+numpy==1.26.4
+jinja2==3.1.6
+# Model staging uses the already installed huggingface_hub runtime.

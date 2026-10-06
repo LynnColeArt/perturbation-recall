@@ -52,6 +52,8 @@ the fresh-description arm, matched variant orchestration, and structured detecti
 and confidence scoring under the new protocol. Use a shared original-model
 direction for the initial weight comparison and keep native re-extraction separate.
 
-Run zero-dose, release, snapshot round-trip, teacher-forced replay, and complete-reset
-checks on the actual Spark backend before an exploratory induction run. The imported
-core is a starting point; the selected Qwen3.6 Q8_0 experiment is not executable yet.
+The [native runner](native-runner.md) adapts those mechanisms through the pinned
+llama.cpp control-vector and full-memory serialization APIs. It preserves the
+inherited fitting code and adds release-state branching and retrospective probes.
+Run its zero-dose, release, snapshot round-trip, teacher-forced replay, and complete-reset
+checks on each selected artifact before an exploratory run.
