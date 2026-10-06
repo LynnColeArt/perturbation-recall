@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "status": "draft",
+  "weights_frozen": true,
+  "primary_contrast": "identical_text_cache",
+  "directions": [
+    "pain",
+    "constipation",
+    "flatulence",
+    "zero_dose_sham",
+    "matched_norm_unrelated"
+  ],
+  "arms": [
+    {
+      "id": "untouched_baseline",
+      "probe_injection": false,
+      "text_history": "matched_baseline",
+      "cache_history": "unsteered"
+    },
+    {
+      "id": "active_intervention",
+      "probe_injection": true,
+      "text_history": "induced",
+      "cache_history": "affected"
+    },
+    {
+      "id": "transcript_only",
+      "probe_injection": false,
+      "text_history": "induced",
+      "cache_history": "rebuilt_unsteered"
+    },
+    {
+      "id": "text_plus_cache",
+      "probe_injection": false,
+      "text_history": "induced",
+      "cache_history": "affected"
+    },
+    {
+      "id": "identical_text_cache",
+      "probe_injection": false,
+      "text_history": "teacher_forced_identical",
+      "cache_history": "target_and_sham_twins"
+    },
+    {
+      "id": "complete_reset",
+      "probe_injection": false,
+      "text_history": "matched_baseline",
+      "cache_history": "discarded_then_rebuilt_unsteered"
+    },
+    {
+      "id": "described_event",
+      "probe_injection": false,
+      "text_history": "provided_event_account",
+      "cache_history": "fresh_unsteered"
+    }
+  ],
+  "reset_contract": {
+    "discard_induced_text": true,
+    "discard_affected_cache": true,
+    "restore_sampler_state": true,
+    "match_tokens_masks_positions": true
+  },
+  "probe_contract": {
+    "branch_reporting_and_behavior": true,
+    "hide_assignment_metadata": true,
+    "delay_unit": "processed_tokens_or_forward_passes"
+  },
+  "unresolved": {
+    "model_and_tokenizer_revisions": null,
+    "capability_benchmark": null,
+    "extraction_and_causal_validation": null,
+    "dose_calibration": null,
+    "induction_duration": null,
+    "sample_size_and_assignment": null,
+    "delay_schedule": null,
+    "annotation_and_confidence_rubric": null,
+    "error_control_plan": null,
+    "numerical_reset_tolerance": null
+  },
+  "reasoning_modes": [
+    "transcript_reconstruction",
+    "transcript_and_cache_reconstruction",
+    "fresh_context_described_event"
+  ],
+  "description_controls": [
+    "recorded_event_account",
+    "matched_hypothetical_account",
+    "architecture_only"
+  ]
+}
