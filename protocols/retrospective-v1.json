@@ -58,7 +58,8 @@
     "discard_induced_text": true,
     "discard_affected_cache": true,
     "restore_sampler_state": true,
-    "match_tokens_masks_positions": true
+    "match_tokens_masks_positions": true,
+    "discard_affected_recurrent_and_convolutional_state": true
   },
   "probe_contract": {
     "branch_reporting_and_behavior": true,
@@ -75,7 +76,12 @@
     "delay_schedule": null,
     "annotation_and_confidence_rubric": null,
     "error_control_plan": null,
-    "numerical_reset_tolerance": null
+    "numerical_reset_tolerance": null,
+    "matched_pair_provenance_and_conversion": null,
+    "shared_tokenization_verification": null,
+    "spark_runtime_and_storage": null,
+    "hybrid_state_snapshot_and_reset_validation": null,
+    "variant_scoring_and_interaction_analysis": null
   },
   "reasoning_modes": [
     "transcript_reconstruction",
@@ -86,5 +92,18 @@
     "recorded_event_account",
     "matched_hypothetical_account",
     "architecture_only"
-  ]
+  ],
+  "model_comparison": {
+    "weight_variants": [
+      "original",
+      "abliterated"
+    ],
+    "cross_all_history_arms": true,
+    "candidate_manifest": "models/spark-qwen36-q8.json",
+    "within_variant_state_only": true,
+    "shared_tokenization_and_runtime": true,
+    "initial_direction_policy": "shared_original_direction",
+    "native_reextraction_analysis": "separate_sensitivity",
+    "score_refusal_and_verbosity_separately": true
+  }
 }

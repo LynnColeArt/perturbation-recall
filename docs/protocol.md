@@ -7,7 +7,7 @@ It is not a preregistration or a report of completed experiments.
 
 The primary hypothesis is that an independently selected capable model can
 discriminate target intervention from sham after injection ends when identical
-visible tokens are paired with differently constructed KV caches. The null
+visible tokens are paired with differently constructed retained inference states. The null
 predicts no discrimination beyond the specified baseline and uncertainty.
 
 Separate hypotheses concern inference from diagnostic generated text, detection
@@ -20,9 +20,16 @@ with the original cache, and reasoning from an explicit description in a fresh
 context. The third mode evaluates conditional reasoning from supplied evidence.
 Its success must not be pooled with covert perturbation detection.
 
+Original and abliterated Qwen3.6-35B-A3B weights form an additional comparison
+axis across every mode and control. Test whether the target-minus-sham effect
+differs between variants. This is a hypothesis about modified checkpoints;
+attribution specifically to abliteration requires adequate source and conversion
+provenance. A larger parameter count does not supply an independent capability
+measure, and two variants of one model do not establish a general capability law.
+
 ## Unit of analysis and assignment
 
-Define a trial by model revision, prompt/scenario group, intervention identity,
+Define a trial by model revision and weight variant, prompt/scenario group, intervention identity,
 dose, induction duration, history arm, probe, delay, and seed. Different arms
 branching from one induction share a trial family. Repeated deterministic calls
 are not independent observations. Aggregate and estimate uncertainty using
@@ -34,6 +41,22 @@ should be blinded to condition where feasible. A capability selection partition,
 a dose-calibration partition, and a final evaluation partition must be separate.
 
 ## Induction
+
+The candidate pair and unresolved provenance checks are documented in
+[the model-pair audit](model-pair.md). Match architecture, tokenizer, template,
+thinking-history policy, quantization, backend, context budget, and decoding.
+Render identical token IDs for the controlled comparisons. Disable speculative
+decoding/MTP initially to avoid untracked auxiliary state. Do not interchange
+retained inference states between weight variants.
+
+The initial transfer comparison uses directions extracted from the original
+checkpoint and applied at corresponding sites in both variants. Record both
+physical norm and scale relative to each model's local activations. Use a common
+physical-dose grid for that contrast; independently calibrated effective doses
+and native per-variant direction extraction belong to labelled sensitivity
+analyses. Neither equal coefficients nor equal narration establishes equal
+perturbation strength. Validate causal efficacy and coherence separately in each
+variant before final evaluation. Keep any failed transfer visible in results.
 
 Use a declared set of target directions and multiple unrelated directions.
 Validate extraction and causal efficacy for each chosen model. Match physical
@@ -63,13 +86,18 @@ At release, record the following state components:
 
 1. Input tokens, generated history, chat template, and special-token placement.
 2. Attention masks, cache positions, positional-encoding inputs, and sequence length.
-3. Every retained KV tensor or other architecture-specific recurrent state.
+3. Every retained KV tensor and architecture-specific recurrent/convolutional state.
 4. Model revision, parameters, adapters, evaluation mode, and numerical precision.
 5. Sampling configuration, random-generator state, stopping criteria, and hooks.
 6. Agent/harness memory, tool logs, hidden prompts, and any auxiliary state.
 
 Frozen weights and disabled dropout are required for the proposed inference
 study. No optimizer step, adapter update, or persistent memory write occurs.
+
+For Qwen3.6's hybrid Gated DeltaNet/full-attention architecture, "cache" denotes
+this entire retained-state object. A runner exposing only attention KV is
+insufficient for the preservation and reset arms. Validate snapshot round trips
+against uninterrupted continuation before testing interventions.
 
 The transcript-only arm rebuilds the cache from the exact retained induced text
 without intervention. The text-plus-cache arm keeps that same text and its

@@ -26,6 +26,26 @@ must not be scored as independently verifiable by the model.
 
 ## Secondary analyses
 
+Estimate the target-minus-sham contrast within each weight variant, then compare
+those contrasts between original and abliterated checkpoints on matched scenario
+groups. Report effect sizes and uncertainty for this interaction, separately by
+history mode and direction. Keep supplied-description reasoning distinct from
+hidden-condition detection. A raw difference in the frequency of first-person
+reports is not this interaction.
+
+Measure baseline cognitive-ergonomics ability, neutral-task accuracy, response
+length, refusal, abstention, and degeneration for both variants. Include all
+assigned trials in the primary scoring convention; freeze handling of missing
+confidence or refusal before evaluation. Conditional scores among responders
+are secondary and expose their denominators. An altered refusal rate can change
+which answers are observable without improving discrimination.
+
+Analyze shared-direction transfer and native re-extraction separately. Account
+for baseline task differences without claiming two checkpoints identify the
+causal effect of capability. If the original source revision or quantization
+recipe cannot be established, describe the result as a released-checkpoint
+comparison and retain that limit on causal attribution to abliteration.
+
 Report active-intervention detection, transcript-only inference, added effects of
 retaining an affected cache, neutral-task performance, and persistence across
 processed-token delays. Relate intervention sensitivity to the independently
@@ -67,6 +87,9 @@ limited capability, or the absence of usable surviving information.
 Record pinned model and tokenizer revisions, precision, extraction corpora,
 vector files and physical norms, intervention sites, chat templates, prompts,
 assignment seeds, decoding parameters, masks/position policies, and cache handling.
+Include checkpoint ancestry, reported weight-edit method, any additional training,
+conversion commands and commits, per-tensor quantization policy, shared versus
+native direction provenance, and recurrent-state snapshot/reset validation.
 Save raw token IDs, complete outputs, probe scores, confidence, failures, relevant
 numerical checks, executed source hashes, and resource measurements.
 

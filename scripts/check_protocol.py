@@ -35,9 +35,22 @@ def check(config):
     described = arms['described_event']
     if described['text_history'] != 'provided_event_account' or described['cache_history'] != 'fresh_unsteered':
         raise ValueError('Described event must use a fresh context, without original event history')
-    required = {'discard_induced_text','discard_affected_cache','restore_sampler_state','match_tokens_masks_positions'}
+    required = {'discard_induced_text','discard_affected_cache',
+                'discard_affected_recurrent_and_convolutional_state',
+                'restore_sampler_state','match_tokens_masks_positions'}
     if any(config.get('reset_contract',{}).get(key) is not True for key in required):
         raise ValueError('Incomplete reset contract')
+    comparison = config.get('model_comparison', {})
+    if comparison.get('weight_variants') != ['original', 'abliterated']:
+        raise ValueError('Both original and abliterated weight variants are required')
+    for key in ('cross_all_history_arms', 'within_variant_state_only',
+                'shared_tokenization_and_runtime', 'score_refusal_and_verbosity_separately'):
+        if comparison.get(key) is not True:
+            raise ValueError(f'Incomplete weight comparison contract: {key}')
+    if comparison.get('initial_direction_policy') != 'shared_original_direction':
+        raise ValueError('Initial comparison must hold direction provenance fixed')
+    if comparison.get('native_reextraction_analysis') != 'separate_sensitivity':
+        raise ValueError('Native direction extraction must be analyzed separately')
     if config.get('primary_contrast') != 'identical_text_cache':
         raise ValueError('Unexpected primary contrast for protocol v1')
     if 'zero_dose_sham' not in config['directions'] or 'matched_norm_unrelated' not in config['directions']:

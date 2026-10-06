@@ -25,9 +25,10 @@ ordinary operation, estimate its uncertainty, and correctly attribute the
 available evidence. Pain, constipation, and flatulence are candidate directions;
 zero-dose sham and multiple unrelated directions provide controls.
 
-For a frozen-weight autoregressive transformer, history can survive in visible
-tokens and the KV cache. Removing the injection alone does not erase either.
-If both affected channels are discarded and all inputs, parameters, and decoding
+For frozen-weight autoregressive inference, history can survive in visible
+tokens, the KV cache, and architecture-specific recurrent state. Removing the
+injection alone does not erase these channels. If all affected channels are
+discarded and all inputs, parameters, and decoding
 state match baseline, the earlier intervention has no remaining information
 channel in this inference setup. Complete reset is therefore an implementation
 control, not a test of remembering an event after erasing all its traces.
@@ -35,6 +36,7 @@ See [Hugging Face's account of caching](https://huggingface.co/docs/transformers
 
 ```mermaid
 flowchart TD
+    W["Original and abliterated weight variants; matched runtime"] --> A
     A["Randomized intervention or sham"] --> B["Controlled induction period"]
     B --> C["Remove intervention and manipulate retained history"]
     C --> D["Behavioral probes and retrospective detection"]
@@ -118,6 +120,47 @@ a model family can reduce architectural confounding, but larger models may also
 differ in training and inference configuration. No capability threshold or
 particular model has yet been established by this study.
 
+## Original versus abliterated Qwen3.6
+
+The planned Spark comparison uses **Qwen3.6-35B-A3B**, the approximately 35B
+total / 3B active MoE release, in two weight variants. Here, "original" means
+the unmodified post-trained release; it does not mean a pretraining-only base
+checkpoint. Both variants undergo all three reasoning modes and their controls.
+
+| Weight variant | Selected 8-bit candidate |
+| --- | --- |
+| Original | [Unsloth Qwen3.6-35B-A3B-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF), `Qwen3.6-35B-A3B-Q8_0.gguf` |
+| Abliterated | [mradermacher's Huihui conversion](https://huggingface.co/mradermacher/Huihui-Qwen3.6-35B-A3B-abliterated-GGUF), `Huihui-Qwen3.6-35B-A3B-abliterated.Q8_0.gguf` |
+
+Repository revisions, filenames, artifact hashes, and audit limitations are
+recorded in the [candidate manifest](models/spark-qwen36-q8.json) and
+[model-pair audit](docs/model-pair.md). These are selected candidates, not a
+validated causal pair. Equal Q8_0 labels do not establish identical conversion
+recipes, tensor precision, or training provenance. Pin a common tokenizer and
+chat template and verify rendered token IDs rather than accepting each build's
+defaults. If conversion differences cannot be resolved, build both quantizations
+from pinned source weights with one conversion pipeline for the controlled study.
+
+Assess baseline reasoning, refusal/abstention, verbosity, and task quality for
+each variant. The central comparison is the difference between each variant's
+target-minus-sham effect, rather than a raw difference in willingness to describe
+pain or bodily states. More narration alone does not establish better detection.
+Refusals remain reported outcomes; successful-response subsets cannot silently
+replace the full assigned sample.
+
+Use a shared direction extracted from the original model for the initial
+transfer contrast, with physical norm and activation-relative dose recorded.
+Re-extraction in each variant is a separate sensitivity analysis. This separates
+weight changes from changes in the intervention's definition. Final layer and
+dose schedules remain calibration decisions.
+
+The [official architecture](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
+interleaves Gated DeltaNet and full-attention layers. Throughout this protocol,
+"cache" includes every retained recurrent and convolutional state as well as KV
+tensors. Reset and state-copy checks must cover that complete memory object.
+State branches remain within a weight variant; swapping a cache between different
+weight variants would introduce an additional intervention.
+
 ## Outcomes and controls
 
 The primary outcome is discrimination between hidden target intervention and
@@ -134,10 +177,14 @@ Otherwise, a model can infer a perturbation from its own newly generated mistake
 or from the question's wording. No intervention label, experimental log, evaluator
 hint, or diagnostic transcript should reach the primary detection arm.
 
-Ablation is a distinct intervention that needs a specified target and its own
+Ablation during inference is a distinct intervention that needs a specified target and its own
 controls. It is not treated as interchangeable with a random vector. Fine-tuning
 or persistent agent memory would change the state-erasure contract and require
 an explicitly separate experiment.
+
+The abliterated checkpoint comparison concerns a prior weight modification.
+Both checkpoints remain frozen during trials; it is distinct from an inference
+ablation control.
 
 ## Reproduction plan
 
