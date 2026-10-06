@@ -55,6 +55,11 @@ and at least one, indexed from zero. The hook is added after `post_moe`, before
 the entire evaluated batch corresponds to the earlier final-position hook.
 Unsteered prefill may be batched. Tolerance applies to matched execution paths;
 prefill splitting can itself introduce small numerical differences.
+Transcript rebuilding therefore preserves induction's prefill split and subsequent
+single-token evaluation schedule. A numerical sham retained-state check requires
+parity under this matched schedule. The intermediate v2 diagnostic used a batched
+replay and exposed a zero-dose wording difference; that execution-order confound
+was corrected before the paired v3 run.
 
 ## Exploratory smoke run
 

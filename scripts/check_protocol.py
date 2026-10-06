@@ -76,7 +76,7 @@ def main():
     print('Structural protocol checks passed; no model was executed.')
     print('Status:',config['status'])
     if pending:
-        print('Unresolved before execution: '+', '.join(pending))
+        print('Unresolved before confirmatory execution: '+', '.join(pending))
 
 
 if __name__ == '__main__':

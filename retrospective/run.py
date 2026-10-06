@@ -61,6 +61,14 @@ def induce(engine, prefix, layer, delta, count, forced=None):
                 intervention_scheduled_forward_passes=1+len(generated))
 
 
+def replay_history(engine, prefix, generated):
+    """Rebuild without steering, preserving the induction's batch boundaries."""
+    engine.replay(prefix[:-1])
+    engine.evaluate(prefix[-1:])
+    for token in generated:
+        engine.evaluate([token])
+
+
 def probe_pair(engine, renderer, release, delay_tokens, max_tokens, active_delta=None, layer=18):
     engine.restore(release)
     if active_delta is not None:
@@ -128,11 +136,11 @@ def run_variant(engine, renderer, variant, conditions, directions, scale, args, 
         delta = args.dose*scale*directions[condition]
         free = induce(engine, prefix, args.layer, delta, args.induction_tokens)
         engine.snapshot('free_affected')
-        engine.replay(free['tokens'])
+        replay_history(engine, prefix, free['generated'])
         engine.snapshot('free_rebuilt')
         identical = induce(engine, prefix, args.layer, delta, teacher_forced_duration, forced)
         engine.snapshot('identical_affected')
-        engine.replay(identical['tokens'])
+        replay_history(engine, prefix, identical['generated'])
         engine.snapshot('identical_rebuilt')
         engine.replay(prefix)
         engine.snapshot('reset')

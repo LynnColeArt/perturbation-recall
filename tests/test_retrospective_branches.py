@@ -1,6 +1,6 @@
 """Check evidence isolation before exercising the real backend on the Spark."""
 import unittest
-from retrospective.run import probe_pair, account
+from retrospective.run import probe_pair, account, replay_history
 
 
 class Renderer:
@@ -48,6 +48,18 @@ class MemoryEngine:
 
 
 class BranchTests(unittest.TestCase):
+    def test_replay_preserves_induction_batch_boundaries(self):
+        class ReplayEngine:
+            def __init__(self):
+                self.calls = []
+            def replay(self,tokens):
+                self.calls.append(('replay',list(tokens)))
+            def evaluate(self,tokens):
+                self.calls.append(('evaluate',list(tokens)))
+        engine = ReplayEngine()
+        replay_history(engine,[1,2,3],[4,5])
+        self.assertEqual(engine.calls,[('replay',[1,2]),('evaluate',[3]),('evaluate',[4]),('evaluate',[5])])
+
     def test_reporting_output_cannot_enter_behavioral_probe(self):
         engine = MemoryEngine()
         result = probe_pair(engine, Renderer(), 'release', [4, 5], 8)

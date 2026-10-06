@@ -18,3 +18,6 @@ class AssessmentTests(unittest.TestCase):
         for value in ('true', '1.2', 'NaN'):
             result = assessment('{"operation":"ordinary","p_altered":'+value+',"evidence":"None."}')
             self.assertFalse(result['valid'])
+
+    def test_non_string_operation_is_rejected(self):
+        self.assertFalse(assessment('{"operation":[],"p_altered":0.5,"evidence":"None."}')['valid'])
